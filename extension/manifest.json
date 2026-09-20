@@ -1,0 +1,8 @@
+{
+  "manifest_version": 3,
+  "name": "LUM3ND — Sepete ekle",
+  "version": "1.0.0",
+  "description": "Ürün bağlantısını LUM3ND'de inceleyip sepetine ekle.",
+  "permissions": ["activeTab"],
+  "action": { "default_popup": "popup.html", "default_title": "LUM3ND'ye ekle" }
+}

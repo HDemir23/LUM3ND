@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="300" height="48" viewBox="0 0 300 48" fill="none">
+  <title>LUM3ND</title>
+  <g stroke="#f4f7f5" stroke-width="7" stroke-linejoin="miter" stroke-linecap="square">
+    <path d="M5 5v37h30"/>
+    <path d="M51 5v27q0 10 15 10t15-10V5"/>
+    <path d="M100 42V5l19 24 19-24v37"/>
+    <path d="M159 5h28v37h-28m4-19h24"/>
+    <path d="M208 42V5l32 37V5"/>
+    <path d="M261 5h13q21 0 21 18.5T274 42h-13Z"/>
+  </g>
+</svg>

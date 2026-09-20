@@ -1,0 +1,12 @@
+node_modules/
+.next/
+.next-testnet/
+.env
+.env.*
+!.env.example
+prisma/*.db*
+*.tsbuildinfo
+test-results/
+
+.playwright-cli/
+output/

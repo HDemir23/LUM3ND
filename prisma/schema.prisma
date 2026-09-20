@@ -1,0 +1,127 @@
+generator client {
+ provider = "prisma-client-js"
+}
+datasource db {
+ provider = "sqlite"
+ url = env("DATABASE_URL")
+}
+model Session {
+ token String @id
+ role String
+ wallet String?
+ user User? @relation(fields: [wallet], references: [wallet])
+ expiresAt DateTime
+}
+model Order {
+ id String @id @default(cuid())
+ createdAt DateTime @default(now())
+ updatedAt DateTime @updatedAt
+ url String
+ merchant String @default("AMAZON")
+ quantity Int
+ notes String
+ status String @default("REQUESTED")
+ quoteVersion Int @default(0)
+ title String?
+ productTry String?
+ shippingTry String?
+ rate String?
+ commissionTry String?
+ totalUsdc String?
+ expiresAt DateTime?
+ memo String @unique
+ network String?
+ issuer String?
+ receiver String?
+ payer String?
+ paidHash String? @unique
+ paidAt DateTime?
+ purchaseRef String?
+ shippingInfo String?
+ refundHash String? @unique
+ wallet String?
+ user User? @relation(fields: [wallet], references: [wallet])
+ checkoutKey String? @unique
+ serviceUsdc String?
+ items OrderItem[]
+ address OrderAddress?
+ stores MerchantOrder[]
+ attempts Attempt[]
+}
+model Attempt {
+ id String @id @default(cuid())
+ orderId String
+ order Order @relation(fields: [orderId], references: [id])
+ hash String @unique
+ xdr String
+ signedXdr String?
+ payer String
+ maxTime Int
+ state String @default("PENDING")
+ createdAt DateTime @default(now())
+}
+
+model User {
+ wallet String @id
+ createdAt DateTime @default(now())
+ sessions Session[]
+ cart CartItem[]
+ orders Order[]
+}
+model LoginChallenge {
+ id String @id @default(cuid())
+ wallet String
+ message String
+ expiresAt DateTime
+ usedAt DateTime?
+}
+model CartItem {
+ id String @id @default(cuid())
+ wallet String
+ user User @relation(fields: [wallet], references: [wallet])
+ url String
+ merchant String
+ notes String
+ quantity Int
+ title String?
+ imageUrl String?
+ unitTry String?
+ productUsd String?
+ unitUsd String?
+ rate String?
+ rateDate String?
+ fetchedAt String?
+ @@unique([wallet, url, notes])
+}
+model OrderItem {
+ id String @id @default(cuid())
+ orderId String
+ order Order @relation(fields: [orderId], references: [id])
+ url String
+ merchant String
+ notes String
+ quantity Int
+ title String?
+ unitTry String?
+ imageUrl String?
+}
+model OrderAddress {
+ orderId String @id
+ order Order @relation(fields: [orderId], references: [id])
+ name String
+ phone String
+ city String
+ district String
+ address String
+ postalCode String
+}
+model MerchantOrder {
+ id String @id @default(cuid())
+ orderId String
+ order Order @relation(fields: [orderId], references: [id])
+ merchant String
+ shippingTry String?
+ purchaseRef String?
+ shippingInfo String?
+ @@unique([orderId, merchant])
+}

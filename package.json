@@ -1,0 +1,46 @@
+{
+  "name": "lum3nd",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev": "next dev --webpack --hostname localhost",
+    "build": "prisma generate && next build --webpack",
+    "start": "next start --hostname localhost",
+    "db:push": "npm run db:backup && prisma db push",
+    "test": "node --import tsx --test tests/*.test.ts",
+    "typecheck": "tsc --noEmit",
+    "setup": "node scripts/setup.mjs && prisma generate && npm run db:push",
+    "test:api": "node --env-file=.env scripts/check-api.mjs",
+    "test:testnet": "node scripts/check-testnet.mjs",
+    "dev:testnet": "node scripts/dev-testnet.mjs",
+    "db:backup": "node --env-file=.env scripts/backup-db.mjs",
+    "extension:pack": "node scripts/pack-extension.mjs"
+  },
+  "dependencies": {
+    "@phosphor-icons/react": "^2.1.10",
+    "@prisma/client": "^6.19.0",
+    "@stellar/freighter-api": "^6.0.0",
+    "@stellar/stellar-sdk": "^17.1.0",
+    "cheerio": "^1.2.0",
+    "decimal.js": "^10.6.0",
+    "next": "^16.0.0",
+    "react": "^19.0.0",
+    "react-dom": "^19.0.0",
+    "zod": "^4.0.0"
+  },
+  "devDependencies": {
+    "@playwright/test": "^1.55.0",
+    "@tailwindcss/postcss": "^4.0.0",
+    "@types/node": "^24.0.0",
+    "@types/react": "^19.0.0",
+    "@types/react-dom": "^19.0.0",
+    "prettier": "^3.9.8",
+    "prisma": "^6.19.0",
+    "tailwindcss": "^4.0.0",
+    "tsx": "^4.20.0",
+    "typescript": "^5.9.0"
+  },
+  "overrides": {
+    "deepmerge-ts": "^8.0.0"
+  }
+}
